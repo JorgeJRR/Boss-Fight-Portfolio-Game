@@ -173,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 10
-  dashForce: 50
+  dashForce: 20
   dashDuration: 0.2
   dashCooldown: 1
   swordDamage: {fileID: 505608002}

@@ -9,6 +9,8 @@ public class PlayerView : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    private bool isAttacking = false;
+
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -34,17 +36,14 @@ public class PlayerView : MonoBehaviour
 
     public void PerformAttackVisual()
     {
-        animator.SetBool("Attack", true);
-    }
 
-    public void FinishAttack()
-    {
-        animator.SetBool("Attack", false);
+        animator.SetTrigger("Attack");
+
     }
 
     public void StartDash()
     {
-            animator.SetBool("isDashing", true);
+        animator.SetBool("isDashing", true);
     }
 
     public void FinishDash()

@@ -72,9 +72,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        playerModel.Move(moveInput);
+        if (!playerModel.IsDashing)
+        {
+            playerModel.Move(moveInput);
+        }
+
         playerView.SetDirection(moveInput.x);
-        
         playerView.PlayWalkAnimation(moveInput.x);
     }
 
