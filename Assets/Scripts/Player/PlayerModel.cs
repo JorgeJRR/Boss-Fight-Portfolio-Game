@@ -8,7 +8,8 @@ public class PlayerModel : MonoBehaviour
     private Rigidbody2D rb;
 
     public float moveSpeed = 5f;
-    public float jumpForce = 10f;
+    public float startedJumpForce = 10f;
+    public float canceledJumpForce = -5f;
     private bool _isGrounded = false;
 
     public float dashForce = 15f;
@@ -18,6 +19,7 @@ public class PlayerModel : MonoBehaviour
     private bool _isDashing = false;
 
     public GameObject swordDamage;
+    public bool isAttacking = false;
 
     public bool IsGrounded
     {
@@ -40,10 +42,6 @@ public class PlayerModel : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (rb == null)
-        {
-            Debug.LogError("PlayerModel requiere un Rigidbody2D en el mismo GameObject.");
-        }
     }
 
     public void Move(Vector2 direction)
@@ -55,9 +53,14 @@ public class PlayerModel : MonoBehaviour
     {
         if (IsGrounded)
         {
-            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0f, startedJumpForce), ForceMode2D.Impulse);
             IsGrounded = false;
         }
+        else if(!IsGrounded && rb.velocity.y > 1)
+        {
+            canceledJumpForce = ((rb.velocity.y) / 2) * -1;
+            rb.AddForce(new Vector2(0f, canceledJumpForce), ForceMode2D.Impulse);
+        } 
     }
 
     public IEnumerator EnableSwordDamage()
@@ -65,6 +68,7 @@ public class PlayerModel : MonoBehaviour
         swordDamage.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         swordDamage.SetActive(false);
+        isAttacking = false;
     }
 
     public IEnumerator PerformDash(float dashDirectionX)
@@ -84,6 +88,7 @@ public class PlayerModel : MonoBehaviour
         IsDashing = false;
 
         yield return new WaitForSeconds(dashCooldown);
+
         CanDash = true;
     }
 }

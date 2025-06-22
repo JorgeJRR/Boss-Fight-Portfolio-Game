@@ -9,8 +9,6 @@ public class PlayerView : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
-    private bool isAttacking = false;
-
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();

@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
         playerActionMap["Move"].performed += context => moveInput = context.ReadValue<Vector2>();
         playerActionMap["Move"].canceled += context => moveInput = Vector2.zero;
 
-        playerActionMap["Jump"].performed += context => OnJumpPerformed();
+        playerActionMap["Jump"].started += context => OnJumpPerformed();
+        playerActionMap["Jump"].canceled += context => OnJumpPerformed();
 
         playerActionMap["Attack"].performed += context => OnAttackPerformed();
 
@@ -47,8 +48,8 @@ public class PlayerController : MonoBehaviour
 
     void OnJumpPerformed()
     {
-        playerModel.Jump();
-        playerView.PlayJumpAnimation(true);
+            playerModel.Jump();
+            playerView.PlayJumpAnimation(true);
     }
     void OnDashPerformed()
     {
@@ -67,7 +68,11 @@ public class PlayerController : MonoBehaviour
 
     void OnAttackPerformed()
     {
-        playerView.PerformAttackVisual();
+        if(!playerModel.isAttacking)
+        {
+            playerModel.isAttacking = true;
+            playerView.PerformAttackVisual();
+        }
     }
 
     void FixedUpdate()

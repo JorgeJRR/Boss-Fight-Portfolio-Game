@@ -1,0 +1,113 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SlimeController : MonoBehaviour
+{
+    private Rigidbody2D rb;
+    public float groundFriction = 5f;
+    public float moveSpeed;
+
+    private bool isGrounded;
+    public GameObject groundCheck;
+    public LayerMask groundMask;
+
+    public float minTimeBetweenMovements = 2f;
+    public float maxTimeBetweenMovements = 5f;
+
+    public SlimeDash SlimeDash;
+    public SlimeLeap SlimeLeap;
+    public SlimeExpand SlimeExpand;
+
+    public SpriteRenderer slimeSpriteRenderer;
+    public Color AttackColor;
+
+    public bool canWalk = true;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        InvokeRepeating("ActivateRandomMovement", 2f, Random.Range(minTimeBetweenMovements, maxTimeBetweenMovements));
+    }
+
+    private void FixedUpdate()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.2f, groundMask);
+        if(isGrounded && canWalk)
+        {
+            rb.velocity = new Vector2((transform.localScale.x > 0 ? -1:1) * moveSpeed, rb.velocity.y);
+        } 
+    }
+
+    private void ActivateRandomMovement()
+    {
+        StartCoroutine(ChangeSlimeColorWithDelay(1f));
+
+        int randomMovement = Random.Range(1, 4);
+
+        switch (randomMovement)
+        {
+            case 1:
+                StartCoroutine(PerformDashAttackWithDelay(2f));
+                AttackColor = Color.blue;
+                break;
+            case 2:
+                StartCoroutine(PerformLeapAttackWithDelay(2f));
+                AttackColor = Color.red;
+                break;
+            case 3:
+                StartCoroutine(PerformExpandAndContractWithDelay(2f));
+                AttackColor = Color.black;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private IEnumerator ChangeSlimeColorWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        slimeSpriteRenderer.color = AttackColor;
+    }
+
+    private IEnumerator PerformDashAttackWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canWalk = false;
+
+        SlimeDash.PerformDashAttack();
+
+        slimeSpriteRenderer.color = Color.white;
+        yield return new WaitForSeconds(1.5f);
+        canWalk = true;
+    }
+
+    private IEnumerator PerformLeapAttackWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canWalk = false;
+
+        SlimeLeap.PerformLeapAttack();
+
+        slimeSpriteRenderer.color = Color.white;
+        yield return new WaitForSeconds(1.5f);
+        canWalk = true;
+    }
+
+    private IEnumerator PerformExpandAndContractWithDelay(float delay)
+    {
+        
+        yield return new WaitForSeconds(delay);
+        canWalk = false;
+
+        SlimeExpand.PerformExpandAndContract();
+
+        slimeSpriteRenderer.color = Color.white;
+        yield return new WaitForSeconds(1.5f);
+        canWalk = true;
+    }
+}
