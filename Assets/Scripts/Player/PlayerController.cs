@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public Transform groundCheck;
 
+    public LayerMask BossLayer;
+
     public PlayerInput playerInput;
     private InputActionMap playerActionMap;
     public Vector2 moveInput;
@@ -92,6 +94,10 @@ public class PlayerController : MonoBehaviour
         {
             playerModel.isGrounded = true;
             playerView.PlayJumpAnimation(false);
+        }
+        else if (((1 << collision.gameObject.layer) & BossLayer) != 0)
+        {
+            playerModel.TakeDamage(20);
         }
     }
 

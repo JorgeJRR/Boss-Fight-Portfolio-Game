@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.UI;
+
+using UnityEngine.UI;
 
 public class PlayerModel : MonoBehaviour
 {
@@ -21,9 +24,16 @@ public class PlayerModel : MonoBehaviour
     public GameObject swordDamage;
     public bool isAttacking = false;
 
+    public float maxHealth;
+    public float currentHealth;
+    public Slider healthSlider;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
     }
 
     public void Move(Vector2 direction)
@@ -72,5 +82,16 @@ public class PlayerModel : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
 
         canDash = true;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        healthSlider.value = currentHealth;
+        if (currentHealth <= 0f)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

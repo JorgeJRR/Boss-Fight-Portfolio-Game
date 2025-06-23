@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlimeController : MonoBehaviour
 {
@@ -22,11 +23,19 @@ public class SlimeController : MonoBehaviour
     public SpriteRenderer slimeSpriteRenderer;
     public Color AttackColor;
 
-    public bool canWalk = true;
+    private bool canWalk = true;
+
+    public float maxHealth;
+    public float currentHealth;
+    public Slider healthSlider;
+    public LayerMask SwordLayer;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
     }
 
     private void Start()
@@ -109,5 +118,24 @@ public class SlimeController : MonoBehaviour
         slimeSpriteRenderer.color = Color.white;
         yield return new WaitForSeconds(1.5f);
         canWalk = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Sword")
+        {
+            TakeDamage(20);
+        }
+    }
+
+    private void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        healthSlider.value = currentHealth;
+        if (currentHealth <= 0f)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
