@@ -10,34 +10,16 @@ public class PlayerModel : MonoBehaviour
     public float moveSpeed = 5f;
     public float startedJumpForce = 10f;
     public float canceledJumpForce = -5f;
-    private bool _isGrounded = false;
+    public bool isGrounded = false;
 
     public float dashForce = 15f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 1f;
-    private bool _canDash = true;
-    private bool _isDashing = false;
+    public bool canDash = true;
+    public bool isDashing = false;
 
     public GameObject swordDamage;
     public bool isAttacking = false;
-
-    public bool IsGrounded
-    {
-        get { return _isGrounded; }
-        set { _isGrounded = value; }
-    }
-
-    public bool CanDash
-    {
-        get { return _canDash; }
-        set { _canDash = value; }
-    }
-
-    public bool IsDashing
-    {
-        get { return _isDashing; }
-        set { _isDashing = value; }
-    }
 
     void Awake()
     {
@@ -51,12 +33,12 @@ public class PlayerModel : MonoBehaviour
 
     public void Jump()
     {
-        if (IsGrounded)
+        if (isGrounded)
         {
             rb.AddForce(new Vector2(0f, startedJumpForce), ForceMode2D.Impulse);
-            IsGrounded = false;
+            isGrounded = false;
         }
-        else if(!IsGrounded && rb.velocity.y > 1)
+        else if(!isGrounded && rb.velocity.y > 1)
         {
             canceledJumpForce = ((rb.velocity.y) / 2) * -1;
             rb.AddForce(new Vector2(0f, canceledJumpForce), ForceMode2D.Impulse);
@@ -73,22 +55,22 @@ public class PlayerModel : MonoBehaviour
 
     public IEnumerator PerformDash(float dashDirectionX)
     {
-        CanDash = false;
-        IsDashing = true;
+        canDash = false;
+        isDashing = true;
 
         rb.velocity = new Vector2(dashDirectionX * dashForce, 0f);
 
         yield return new WaitForSeconds(dashDuration);
 
-        if (IsDashing)
+        if (isDashing)
         {
             rb.velocity = new Vector2(0f, rb.velocity.y);
         }
 
-        IsDashing = false;
+        isDashing = false;
 
         yield return new WaitForSeconds(dashCooldown);
 
-        CanDash = true;
+        canDash = true;
     }
 }

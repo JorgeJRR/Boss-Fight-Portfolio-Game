@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnDashPerformed()
     {
-        if (playerModel.CanDash)
+        if (playerModel.canDash)
         {
             float dashDirectionX = moveInput.x;
             if (dashDirectionX == 0)
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!playerModel.IsDashing)
+        if (!playerModel.isDashing)
         {
             playerModel.Move(moveInput);
         }
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
     {
         if (((1 << collision.gameObject.layer) & groundLayer) != 0)
         {
-            playerModel.IsGrounded = true;
+            playerModel.isGrounded = true;
             playerView.PlayJumpAnimation(false);
         }
     }
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         if (((1 << collision.gameObject.layer) & groundLayer) != 0)
         {
-            playerModel.IsGrounded = false;
+            playerModel.isGrounded = false;
         }
     }
 }
