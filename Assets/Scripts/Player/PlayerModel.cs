@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class PlayerModel : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private SpriteRenderer spriteR;
 
     public float moveSpeed = 5f;
     public float startedJumpForce = 10f;
@@ -21,8 +22,9 @@ public class PlayerModel : MonoBehaviour
     public bool canDash = true;
     public bool isDashing = false;
 
-    public GameObject swordDamage;
+    public GameObject [] swordDamage;
     public bool isAttacking = false;
+    public LayerMask bossLayer;
 
     public float maxHealth;
     public float currentHealth;
@@ -31,6 +33,7 @@ public class PlayerModel : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteR = rb.GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
@@ -52,14 +55,19 @@ public class PlayerModel : MonoBehaviour
         {
             canceledJumpForce = ((rb.velocity.y) / 2) * -1;
             rb.AddForce(new Vector2(0f, canceledJumpForce), ForceMode2D.Impulse);
-        } 
+        }
     }
 
-    public IEnumerator EnableSwordDamage()
+    public IEnumerator SwordAttack()
     {
-        swordDamage.SetActive(true);
         yield return new WaitForSeconds(0.2f);
-        swordDamage.SetActive(false);
+
+        Collider2D collider = Physics2D.OverlapCircle((spriteR.flipX? swordDamage[1] : swordDamage[0]).transform.position, 0.6f, bossLayer);
+        if(collider != null)
+        {
+            collider.GetComponent<SlimeController>().TakeDamage(20);
+        }
+
         isAttacking = false;
     }
 

@@ -21,22 +21,18 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -598478279, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
-    - time: 0.1
-      value: {fileID: 1649229337, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
-    - time: 0.16666667
       value: {fileID: -135764572, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
-    - time: 0.25
+    - time: 0.1
       value: {fileID: 978629740, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
-    - time: 0.35
+    - time: 0.2
       value: {fileID: -309738279, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
-    - time: 0.41666666
+    - time: 0.3
       value: {fileID: -1645608527, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
-    - time: 0.51666665
+    - time: 0.4
       value: {fileID: -1613986426, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
-    - time: 0.56666666
+    - time: 0.5
       value: {fileID: -1238047734, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
-    - time: 0.6666667
+    - time: 0.5833333
       value: {fileID: -112895535, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
     attribute: m_Sprite
     path: 
@@ -60,8 +56,6 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -598478279, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
-    - {fileID: 1649229337, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
     - {fileID: -135764572, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
     - {fileID: 978629740, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
     - {fileID: -309738279, guid: 6207d126ae13f7a419db3ae7d3bdc8ee, type: 3}
@@ -74,7 +68,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.68333334
+    m_StopTime: 0.59999996
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -95,7 +89,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.5
-    functionName: EnableSwordDamage
+    functionName: SwordAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

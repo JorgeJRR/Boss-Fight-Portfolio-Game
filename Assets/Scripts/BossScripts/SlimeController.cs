@@ -28,7 +28,6 @@ public class SlimeController : MonoBehaviour
     public float maxHealth;
     public float currentHealth;
     public Slider healthSlider;
-    public LayerMask SwordLayer;
 
     private void Awake()
     {
@@ -120,15 +119,7 @@ public class SlimeController : MonoBehaviour
         canWalk = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Sword")
-        {
-            TakeDamage(20);
-        }
-    }
-
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
