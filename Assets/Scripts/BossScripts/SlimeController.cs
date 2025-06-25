@@ -45,10 +45,11 @@ public class SlimeController : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.2f, groundMask);
+
         if(isGrounded && canWalk)
         {
             rb.velocity = new Vector2((transform.localScale.x > 0 ? -1:1) * moveSpeed, rb.velocity.y);
-        } 
+        }
     }
 
     private void ActivateRandomMovement()
