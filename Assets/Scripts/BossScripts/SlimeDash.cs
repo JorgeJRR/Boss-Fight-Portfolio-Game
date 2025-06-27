@@ -7,20 +7,18 @@ public class SlimeDash : MonoBehaviour
     public float dashForce = 10f;
     public Transform player;
 
-    private void Update()
+    private Rigidbody2D rb;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            PerformDashAttack();
-        }
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void PerformDashAttack()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
 
         Vector2 dashDirection = (player.position - transform.position).normalized;
-
         dashDirection.y = 0;
 
         rb.velocity = dashDirection * dashForce;

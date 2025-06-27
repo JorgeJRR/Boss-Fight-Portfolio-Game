@@ -22,11 +22,11 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -1733650086, guid: 840e777f9d5f65d408d1d50bd6dd82c6, type: 3}
-    - time: 0.11666667
+    - time: 0.083333336
       value: {fileID: -486764873, guid: 840e777f9d5f65d408d1d50bd6dd82c6, type: 3}
-    - time: 0.21666667
+    - time: 0.18333334
       value: {fileID: -2048290290, guid: 840e777f9d5f65d408d1d50bd6dd82c6, type: 3}
-    - time: 0.33333334
+    - time: 0.28333333
       value: {fileID: 1240397898, guid: 840e777f9d5f65d408d1d50bd6dd82c6, type: 3}
     attribute: m_Sprite
     path: 
@@ -59,7 +59,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.35000002
+    m_StopTime: 0.3
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -79,7 +79,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.33333334
+  - time: 0.3
     functionName: FinishDash
     data: 
     objectReferenceParameter: {fileID: 0}

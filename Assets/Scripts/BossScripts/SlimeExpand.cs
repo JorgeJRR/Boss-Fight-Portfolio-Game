@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class SlimeExpand : MonoBehaviour
 {
-    public BossFlip flip;
-
     public float expandDuration = 1f;
+
     public Vector3 originalScale;
     public Vector3 multiplyExpandedScale;
 
     public bool isBig = false;
     public float fuerzaEmpuje = 10f;
-
-    private void Awake()
-    { 
-        flip = GetComponent<BossFlip>();
-    }
 
     public void PerformExpandAndContract()
     {
@@ -28,13 +22,12 @@ public class SlimeExpand : MonoBehaviour
         originalScale = transform.localScale;
         multiplyExpandedScale = originalScale * 2;
 
-        flip.enabled = false;
         transform.localScale = multiplyExpandedScale;
         isBig = true;
+
         yield return new WaitForSeconds(expandDuration);
 
         transform.localScale = originalScale;
-        flip.enabled = true;
         isBig = false;
     }
 

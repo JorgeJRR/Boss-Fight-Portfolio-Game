@@ -9,13 +9,12 @@ public class SlimeLeap : MonoBehaviour
     public float fallForce = 10;
 
     private bool bossUpPlayer;
-
     public Transform player;
     public LayerMask playerLayer;
 
     private Rigidbody2D rb;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -27,14 +26,16 @@ public class SlimeLeap : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(bossUpPlayer)
+        if (bossUpPlayer)
         {
-            rb.velocity = new Vector2(0, rb.velocity.y -5);
+            rb.velocity = new Vector2(0, rb.velocity.y - 5); 
         }
     }
 
     public void PerformLeapAttack()
     {
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
+
         Vector2 jumpDirection = (player.position - transform.position).normalized;
 
         float verticalForce = leapForce * Mathf.Sin(leapAngle * Mathf.Deg2Rad);
