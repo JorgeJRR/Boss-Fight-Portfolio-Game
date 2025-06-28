@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // Todavía necesario si el controlador maneja directamente el slider UI
+using UnityEngine.UI;
 
 public class SlimeController : MonoBehaviour
 {
@@ -11,6 +11,9 @@ public class SlimeController : MonoBehaviour
     public SlimeDash SlimeDash;
     public SlimeLeap SlimeLeap;
     public SlimeExpand SlimeExpand;
+
+    public GameObject player;
+    public bool playerRight;
 
     public Transform groundCheck;
     public LayerMask groundMask;
@@ -37,6 +40,7 @@ public class SlimeController : MonoBehaviour
         if (healthSlider != null && slimeModel != null)
         {
             healthSlider.maxValue = slimeModel.maxHealth;
+            slimeModel.currentHealth = slimeModel.maxHealth;
             healthSlider.value = slimeModel.currentHealth;
         }
     }
@@ -49,13 +53,14 @@ public class SlimeController : MonoBehaviour
     private void FixedUpdate()
     {
         slimeModel.SetGrounded(Physics2D.OverlapCircle(groundCheck.transform.position, 0.2f, groundMask));
+        
+        playerRight = transform.position.x < player.transform.position.x;
 
         if (slimeModel.isGrounded && slimeModel.canWalk)
         {
-            float directionX = (transform.localScale.x > 0 ? -1 : 1);
-            slimeModel.Move(directionX);
+            slimeView.SetFacingDirection(playerRight);
+            slimeModel.Move(playerRight? 1: -1);
             slimeView.PlayWalkAnimation(slimeModel.moveSpeed);
-            slimeView.SetFacingDirection(directionX);
         }
         else
         {

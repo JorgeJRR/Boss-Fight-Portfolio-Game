@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
             float dashDirectionX = moveInput.x;
             if (dashDirectionX == 0)
             {
-                dashDirectionX = playerView.GetComponent<SpriteRenderer>().flipX ? -1f : 1f;
+                dashDirectionX = playerView.IsFacingRight() ? -1f : 1f;
             }
 
             StartCoroutine(playerModel.PerformDash(dashDirectionX));
@@ -70,10 +70,11 @@ public class PlayerController : MonoBehaviour
 
     void OnAttackPerformed()
     {
-        if(!playerModel.isAttacking)
+        if (!playerModel.isAttacking)
         {
             playerModel.isAttacking = true;
             playerView.PerformAttackVisual();
+            StartCoroutine(playerModel.SwordAttack(playerView.IsFacingRight()));
         }
     }
 

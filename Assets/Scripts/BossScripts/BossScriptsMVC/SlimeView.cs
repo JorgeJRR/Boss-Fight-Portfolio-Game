@@ -9,7 +9,6 @@ public class SlimeView : MonoBehaviour
     private Animator animator;
 
     private Vector3 originalScale;
-    private float lastDirectionX = 1f;
 
     void Awake()
     {
@@ -17,18 +16,16 @@ public class SlimeView : MonoBehaviour
         originalScale = transform.localScale;
     }
 
-    public void SetFacingDirection(float horizontalDirection)
+    public void SetFacingDirection(bool playerRight)
     {
   
-        if (horizontalDirection > 0.1f)
+        if (playerRight)
         {
-            transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
-            lastDirectionX = 1f;
+            spriteRenderer.flipX = true;
         }
-        else if (horizontalDirection < -0.1f)
+        else
         {
-            transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
-            lastDirectionX = -1f;
+            spriteRenderer.flipX = false;
         }
     }
 

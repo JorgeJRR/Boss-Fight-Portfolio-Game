@@ -2,14 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.UI;
-
 using UnityEngine.UI;
 
 public class PlayerModel : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private SpriteRenderer spriteR;
 
     public float moveSpeed = 5f;
     public float startedJumpForce = 10f;
@@ -22,7 +19,7 @@ public class PlayerModel : MonoBehaviour
     public bool canDash = true;
     public bool isDashing = false;
 
-    public GameObject [] swordDamage;
+    public GameObject[] swordDamage;
     public bool isAttacking = false;
     public LayerMask bossLayer;
 
@@ -33,10 +30,7 @@ public class PlayerModel : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteR = rb.GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
-        healthSlider.maxValue = maxHealth;
-        healthSlider.value = currentHealth;
     }
 
     public void Move(Vector2 direction)
@@ -51,19 +45,19 @@ public class PlayerModel : MonoBehaviour
             rb.AddForce(new Vector2(0f, startedJumpForce), ForceMode2D.Impulse);
             isGrounded = false;
         }
-        else if(!isGrounded && rb.velocity.y > 1)
+        else if (!isGrounded && rb.velocity.y > 1)
         {
             canceledJumpForce = ((rb.velocity.y) / 2) * -1;
             rb.AddForce(new Vector2(0f, canceledJumpForce), ForceMode2D.Impulse);
         }
     }
 
-    public IEnumerator SwordAttack()
+    public IEnumerator SwordAttack(bool isFacingRight)
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
 
-        Collider2D collider = Physics2D.OverlapCircle((spriteR.flipX? swordDamage[1] : swordDamage[0]).transform.position, 0.6f, bossLayer);
-        if(collider != null)
+        Collider2D collider = Physics2D.OverlapCircle((isFacingRight ? swordDamage[1] : swordDamage[0]).transform.position, 0.6f, bossLayer);
+        if (collider != null)
         {
             collider.GetComponent<SlimeController>().TakeDamage(20);
         }
@@ -94,12 +88,6 @@ public class PlayerModel : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        healthSlider.value = currentHealth;
-        if (currentHealth <= 0f)
-        {
-            gameObject.SetActive(false);
-        }
+
     }
 }

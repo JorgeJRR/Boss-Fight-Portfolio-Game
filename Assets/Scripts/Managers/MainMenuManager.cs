@@ -41,7 +41,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartBlinkingText()
     {
-        blinkTween = blinkText.DOFade(0f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        blinkTween = blinkText.DOFade(0f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
     }
 
     public void StopBlinkingText()

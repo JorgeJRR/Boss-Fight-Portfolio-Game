@@ -28,6 +28,14 @@ public class PlayerView : MonoBehaviour
             }
         }
     }
+    public bool IsFacingRight()
+    {
+        if (spriteRenderer != null)
+        {
+            return !spriteRenderer.flipX;
+        }
+        return true;
+    }
 
     public void PlayWalkAnimation(float move) { animator.SetFloat("Speed", Mathf.Abs(move)); }
     public void PlayJumpAnimation(bool jump) { animator.SetBool("isJumping", jump); }
