@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
             float dashDirectionX = moveInput.x;
             if (dashDirectionX == 0)
             {
-                dashDirectionX = playerView.IsFacingRight() ? -1f : 1f;
+                dashDirectionX = playerView.IsFacingRight() ? 1f : -1f;
             }
 
             StartCoroutine(playerModel.PerformDash(dashDirectionX));
