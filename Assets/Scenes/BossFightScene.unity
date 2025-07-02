@@ -513,7 +513,7 @@ Transform:
   m_GameObject: {fileID: 94447807}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -640,7 +640,7 @@ Transform:
   m_GameObject: {fileID: 302241839}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -0.468, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -885,7 +885,7 @@ Transform:
   m_GameObject: {fileID: 505608002}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1128,13 +1128,14 @@ GameObject:
   - component: {fileID: 1028271352}
   - component: {fileID: 1028271351}
   - component: {fileID: 1028271350}
+  - component: {fileID: 1028271359}
   m_Layer: 7
   m_Name: SlimeBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1028271348
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1176,7 +1177,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1323561184, guid: 4d0173c2b886fd8488db4191070c0aa1, type: 3}
+  m_Sprite: {fileID: -2090030887, guid: 182cca75e3bf4044992bafc354c2fa91, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1196,7 +1197,7 @@ Transform:
   m_GameObject: {fileID: 1028271347}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.37, y: -0.7, z: 0}
+  m_LocalPosition: {x: 5.53, y: -3.11, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1215,9 +1216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99830f34ded9a3846b438cbd3d22f163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leapForce: 15
+  leapForce: 20
   leapAngle: 45
-  fallForce: 15
+  fallForce: 20
   player: {fileID: 28437025}
   playerLayer:
     serializedVersion: 2
@@ -1341,9 +1342,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.04529333}
+  m_Offset: {x: 0, y: 0.5816807}
   serializedVersion: 2
-  m_Radius: 0.51970667
+  m_Radius: 0.58247894
 --- !u!114 &1028271357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1356,7 +1357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6409bc471ad6ef478ac451d1696db1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 1028271359}
 --- !u!114 &1028271358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1380,6 +1381,27 @@ MonoBehaviour:
   currentHealth: 0
   canWalk: 1
   isAttacking: 0
+--- !u!95 &1028271359
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028271347}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 912a29488a070894c9d558edccde4c4c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1287043786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,7 +1419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1287043787
 Animator:
   serializedVersion: 5

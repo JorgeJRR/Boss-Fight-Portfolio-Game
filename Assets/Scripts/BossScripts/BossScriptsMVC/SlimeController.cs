@@ -60,11 +60,11 @@ public class SlimeController : MonoBehaviour
         {
             slimeView.SetFacingDirection(playerRight);
             slimeModel.Move(playerRight? 1: -1);
-            slimeView.PlayWalkAnimation(slimeModel.moveSpeed);
+            slimeView.PlayWalkAnimation(1);
         }
         else
         {
-            slimeView.PlayWalkAnimation(0);
+            slimeView.PlayWalkAnimation(-1);
         }
     }
 
@@ -99,16 +99,15 @@ public class SlimeController : MonoBehaviour
         slimeModel.SetCanWalk(false);
 
         slimeView.SetSpriteColor(dashAttackColor);
-        slimeView.PlayAttackAnimation("DashAttack");
 
         yield return new WaitForSeconds(delay);
 
+        slimeView.PlayAttackAnimation("DashAttack");
         SlimeDash.PerformDashAttack();
-        slimeView.SetDashAnimation(true);
 
         yield return new WaitForSeconds(1.5f);
 
-        slimeView.SetDashAnimation(false);
+        slimeView.FinishAttack();
         slimeView.ResetSpriteColor();
         slimeModel.SetCanWalk(true);
         slimeModel.SetIsAttacking(false);
@@ -120,16 +119,15 @@ public class SlimeController : MonoBehaviour
         slimeModel.SetCanWalk(false);
 
         slimeView.SetSpriteColor(leapAttackColor);
-        slimeView.PlayAttackAnimation("LeapAttack");
 
         yield return new WaitForSeconds(delay);
 
+        slimeView.PlayAttackAnimation("LeapAttack");
         SlimeLeap.PerformLeapAttack();
-        slimeView.SetLeapAnimation(true);
 
         yield return new WaitForSeconds(1.5f);
 
-        slimeView.SetLeapAnimation(false);
+        slimeView.FinishAttack();
         slimeView.ResetSpriteColor();
         slimeModel.SetCanWalk(true);
         slimeModel.SetIsAttacking(false);
@@ -141,14 +139,15 @@ public class SlimeController : MonoBehaviour
         slimeModel.SetCanWalk(false);
 
         slimeView.SetSpriteColor(expandAttackColor);
-        slimeView.PlayAttackAnimation("ExpandAttack");
 
         yield return new WaitForSeconds(delay);
 
+        slimeView.PlayAttackAnimation("ExpandAttack");
         SlimeExpand.PerformExpandAndContract();
 
         yield return new WaitForSeconds(SlimeExpand.expandDuration);
 
+        slimeView.FinishAttack();
         slimeView.ResetSpriteColor();
         slimeModel.SetCanWalk(true);
         slimeModel.SetIsAttacking(false);

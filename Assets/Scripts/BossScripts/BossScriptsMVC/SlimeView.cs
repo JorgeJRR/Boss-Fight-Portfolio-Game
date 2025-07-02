@@ -18,22 +18,23 @@ public class SlimeView : MonoBehaviour
 
     public void SetFacingDirection(bool playerRight)
     {
-  
+
         if (playerRight)
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = false;
         }
         else
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = true;
         }
     }
 
     public void PlayWalkAnimation(float speed)
     {
+
         if (animator != null)
         {
-            animator.SetFloat("Speed", Mathf.Abs(speed));
+            animator.SetFloat("Speed", speed);
         }
     }
 
@@ -42,22 +43,15 @@ public class SlimeView : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger(triggerName);
+            animator.SetBool("IsAttacking", true);
         }
     }
 
-    public void SetDashAnimation(bool isDashing)
+    public void FinishAttack()
     {
         if (animator != null)
         {
-            animator.SetBool("isDashing", isDashing);
-        }
-    }
-
-    public void SetLeapAnimation(bool isLeaping)
-    {
-        if (animator != null)
-        {
-            animator.SetBool("isLeaping", isLeaping);
+            animator.SetBool("IsAttacking", false);
         }
     }
 
@@ -74,18 +68,6 @@ public class SlimeView : MonoBehaviour
         if (spriteRenderer != null)
         {
             spriteRenderer.color = Color.white;
-        }
-    }
-
-    public void SetExpandVisual(bool isExpanded, Vector3 targetScale)
-    {
-        if (isExpanded)
-        {
-            transform.localScale = targetScale;
-        }
-        else
-        {
-            transform.localScale = originalScale;
         }
     }
 }
