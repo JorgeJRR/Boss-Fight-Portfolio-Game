@@ -17,9 +17,14 @@ public class PlayerController : MonoBehaviour
     private InputActionMap playerActionMap;
     public Vector2 moveInput;
 
-    void Awake()
+    public LayerMask doorLayer;
+
+    void Start()
     {
-        playerActionMap = playerInput.actions.FindActionMap("Player");
+        if(playerActionMap == null)
+        {
+            playerActionMap = playerInput.actions.FindActionMap("Player");
+        }
 
         playerActionMap["Move"].performed += context => moveInput = context.ReadValue<Vector2>();
         playerActionMap["Move"].canceled += context => moveInput = Vector2.zero;
@@ -30,6 +35,8 @@ public class PlayerController : MonoBehaviour
         playerActionMap["Attack"].performed += context => OnAttackPerformed();
 
         playerActionMap["Dash"].performed += context => OnDashPerformed();
+
+        playerActionMap["openDoor"].started += context => OpenDoor();
     }
 
     void OnEnable()
@@ -75,6 +82,14 @@ public class PlayerController : MonoBehaviour
             playerModel.isAttacking = true;
             playerView.PerformAttackVisual();
             StartCoroutine(playerModel.SwordAttack(playerView.IsFacingRight()));
+        }
+    }
+
+    void OpenDoor()
+    {
+        if (Physics2D.OverlapCircle(transform.position, .1f, doorLayer) != null)
+        {
+            GameManager.Instance.EnterBossScene();
         }
     }
 

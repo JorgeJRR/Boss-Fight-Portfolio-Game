@@ -53,6 +53,8 @@ public class SlimeController : MonoBehaviour
     private void FixedUpdate()
     {
         slimeModel.SetGrounded(Physics2D.OverlapCircle(groundCheck.transform.position, 0.2f, groundMask));
+
+        slimeView.SetGrounded(slimeModel.isGrounded);
         
         playerRight = transform.position.x < player.transform.position.x;
 

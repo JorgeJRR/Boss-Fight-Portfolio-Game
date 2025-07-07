@@ -5,6 +5,7 @@ using UnityEngine;
 public class SlimeView : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+
     [SerializeField]
     private Animator animator;
 
@@ -18,7 +19,6 @@ public class SlimeView : MonoBehaviour
 
     public void SetFacingDirection(bool playerRight)
     {
-
         if (playerRight)
         {
             spriteRenderer.flipX = false;
@@ -29,9 +29,13 @@ public class SlimeView : MonoBehaviour
         }
     }
 
+    public void SetGrounded(bool grounded)
+    {
+        animator.SetBool("Grounded", grounded);
+    }
+
     public void PlayWalkAnimation(float speed)
     {
-
         if (animator != null)
         {
             animator.SetFloat("Speed", speed);
