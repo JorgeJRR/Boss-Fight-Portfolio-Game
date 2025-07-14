@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance;
+
     public PlayerModel playerModel;
     public PlayerView playerView;
 
@@ -19,9 +21,19 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask doorLayer;
 
-    void Start()
+    void Awake()
     {
-        if(playerActionMap == null)
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else 
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+
+        if (playerActionMap == null)
         {
             playerActionMap = playerInput.actions.FindActionMap("Player");
         }
@@ -89,8 +101,15 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(transform.position, .1f, doorLayer) != null)
         {
-            GameManager.Instance.EnterBossScene();
+            GameManager.Instance.OpenedDoorCurtain();
         }
+    }
+
+    public void PlayerWin()
+    {
+        playerView.SetWinAnimation();
+        playerModel.OnPlayerWin();
+        playerActionMap.Disable();
     }
 
     void FixedUpdate()

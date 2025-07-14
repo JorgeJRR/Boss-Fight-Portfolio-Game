@@ -33,6 +33,11 @@ public class PlayerModel : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    private void Start()
+    {
+        transform.position = new Vector3(-6.5f, -1.6f, 0);
+    }
+
     public void Move(Vector2 direction)
     {
         rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
@@ -84,6 +89,11 @@ public class PlayerModel : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
 
         canDash = true;
+    }
+
+    public void OnPlayerWin()
+    {
+        rb.gravityScale = 0;
     }
 
     public void TakeDamage(float damage)

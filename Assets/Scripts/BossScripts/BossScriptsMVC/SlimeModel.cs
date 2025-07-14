@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class SlimeModel : MonoBehaviour
 
     public bool canWalk = true;
     public bool isAttacking = false;
+
+    public static Action bossKilled;
 
     void Awake()
     {
@@ -43,7 +46,7 @@ public class SlimeModel : MonoBehaviour
 
         if (currentHealth <= 0f)
         {
-            gameObject.SetActive(false);
+            BossDead();
             Debug.Log("Slime Boss defeated!");
         }
         else
@@ -60,5 +63,11 @@ public class SlimeModel : MonoBehaviour
     public void SetIsAttacking(bool value)
     {
         isAttacking = value;
+    }
+
+    public void BossDead()
+    {
+        GameManager.Instance.PlayerWinPanel();
+        gameObject.SetActive(false);
     }
 }

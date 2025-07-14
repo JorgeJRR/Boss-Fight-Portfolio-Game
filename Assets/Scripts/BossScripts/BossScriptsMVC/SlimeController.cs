@@ -43,6 +43,8 @@ public class SlimeController : MonoBehaviour
             slimeModel.currentHealth = slimeModel.maxHealth;
             healthSlider.value = slimeModel.currentHealth;
         }
+
+        player = PlayerController.Instance.gameObject;
     }
 
     private void Start()

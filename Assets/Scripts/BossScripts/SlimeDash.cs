@@ -14,6 +14,11 @@ public class SlimeDash : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        player = PlayerController.Instance.gameObject.transform;
+    }
+
     public void PerformDashAttack()
     {
         if (rb == null) rb = GetComponent<Rigidbody2D>();

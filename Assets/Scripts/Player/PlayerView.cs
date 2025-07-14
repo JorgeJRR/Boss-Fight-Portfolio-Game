@@ -56,4 +56,9 @@ public class PlayerView : MonoBehaviour
     {
         animator.SetBool("isDashing", false);
     }
+
+    public void SetWinAnimation()
+    {
+        Debug.Log("Ganaste! no hay animacion de victoria :,(");
+    }
 }
